@@ -35,7 +35,7 @@ export const SignUp=async(req,res)=>{
             await upsertStreamUser({
                 id: newUser._id.toString(),
                 name: newUser.fullname,
-                image: newUser.profilePic || "",
+                image: newUser.profilepic || "",
             });
             console.log(`Stream user created for ${newUser.fullname}`);
         } catch (error) {
@@ -133,7 +133,7 @@ export const onboard=async(req,res)=>{
             await upsertStreamUser({
                 id:updatedUser._id.toString(),
                 name:updatedUser.fullname,
-                image:updatedUser.profilePic || ""
+                image:updatedUser.profilepic || ""
             })
             
             console.log(`Stream user updated after onboarding for ${updatedUser.fullname}`)

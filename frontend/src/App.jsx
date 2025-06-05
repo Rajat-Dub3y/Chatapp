@@ -10,25 +10,27 @@ import {Toaster} from "react-hot-toast"
 import Loader from "./components/Loader"
 import useAuthUser from "./hooks/useAuthUser"
 import Layout from "./components/Layout"
+import { useThemeStore } from "./store/useThemeStore"
 
 const App=()=> {
 
   const {isLoading,authUser}=useAuthUser();
 
+  const {theme}=useThemeStore()
   const isAuth=Boolean(authUser)
   const isOnboarded=authUser?.isOnboarded
 
   if(isLoading) return <Loader />
 
   return (
-    <div className="h-screen" data-them="night">
+    <div className="h-screen" data-theme={theme}>
       <Routes>
         <Route path="/" element={isAuth && isOnboarded? (<Layout showSidebar={true} > <Home/> </Layout>) : <Navigate to={ !isAuth? `/login` : "onboarding" } />  }/>
         <Route path="/signup" element={ !isAuth ? <SignUpPage/> : <Navigate to={ isOnboarded ? "/" : "/onboarding" }/> } />
         <Route path="/login" element={ !isAuth ? <LoginPage/> : <Navigate to={ isOnboarded ? "/" : "/onboarding" }/>}/>
-        <Route path="/notifications" element={<Notification/>}/>
-        <Route path="/call" element={isAuth? <CallPage/> :<Navigate to="/login" /> }/>
-        <Route path="/chat" element={isAuth? <ChatPage/> :<Navigate to="/login" /> }/>
+        <Route path="/notifications" element={isAuth && isOnboarded? (<Layout showSidebar={true} > <Notification/> </Layout>) : <Navigate to={ !isAuth? `/login` : "onboarding" } />  }/>
+        <Route path="/call/:id" element={ isAuth && isOnboarded ? (<CallPage />) : (<Navigate to={!isAuth ? "/login" : "/onboarding"} />)}/>
+        <Route path="/chat/:id" element={ isAuth && isOnboarded ? (<Layout showSidebar={false}><ChatPage /></Layout>) : (<Navigate to={!isAuth ? "/login" : "/onboarding"} />) }/>
         <Route path="/onboarding" element={isAuth? (!isOnboarded ? <OnboardingPage/> : <Navigate to="/" />) :<Navigate to="/login" /> }/>
         <Route path="/" element={<Home/>}/>
       </Routes>

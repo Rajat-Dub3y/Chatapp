@@ -8,7 +8,7 @@ export const getRecommendedUser=async(requestAnimationFrame,res)=>{
         const recommendeduser=await User.find({
             $and:[
                 {_id:{$ne:currentUserId}},
-                {$id:{$nin:currentUser.friends}},
+                {_id:{$nin:currentUser.friends}},
             ],
         });
         res.status(200).json(recommendeduser)
