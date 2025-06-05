@@ -65,7 +65,7 @@ const ChatPage = () => {
       }
     }
     initChat()
-  },[tokenData,authUser,targetUserId])
+  },[tokenData,authUser,targetUserId,setChatClient])
 
   if(loading || !chatClient || !channel) return <ChatLoader/>
 
