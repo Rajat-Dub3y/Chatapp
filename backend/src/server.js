@@ -6,9 +6,12 @@ import chatRouter from "./routes/chatRouters.js"
 import connectDB from "./utils/db.js"
 import cookieParser from "cookie-parser"
 import cors from "cors"
+import path from "path"
 
 const app= express()
 const port=process.env.PORT
+
+const __dirname=path.resolve()
 
 
 dotenv.config()
@@ -31,6 +34,14 @@ cors({
 app.use("/api/auth",authRouter)
 app.use("/api/users",userRouter)
 app.use("/api/chat",chatRouter)
+
+if(process.env.NODE_ENV==="production"){
+  app.use(express.static(path.join(__dirname,"../frontend/build")))
+
+  app.get("*",(req,res)=>{
+    res.sendFile(path.join(__dirname,"../frontend","build","index.html"))
+  })
+}
 
 
 
