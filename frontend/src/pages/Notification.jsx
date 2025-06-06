@@ -1,5 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import React from 'react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { acceptFriendRequest, getFriendRequest } from '../lib/api';
 import { BellIcon, ClockIcon, MessageSquareIcon, UserCheckIcon } from 'lucide-react';
 import NoNotificationsFound from '../components/NoNotificationsFound';
