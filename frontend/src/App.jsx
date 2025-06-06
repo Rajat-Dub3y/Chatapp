@@ -11,6 +11,7 @@ import Loader from "./components/Loader"
 import useAuthUser from "./hooks/useAuthUser"
 import Layout from "./components/Layout"
 import { useThemeStore } from "./store/useThemeStore"
+import Friends from "./pages/Friends"
 
 const App=()=> {
 
@@ -29,6 +30,7 @@ const App=()=> {
         <Route path="/signup" element={ !isAuth ? <SignUpPage/> : <Navigate to={ isOnboarded ? "/" : "/ing" }/> } />
         <Route path="/login" element={ !isAuth ? <LoginPage/> : <Navigate to={ isOnboarded ? "/" : "/ing" }/>}/>
         <Route path="/notifications" element={isAuth && isOnboarded? (<Layout showSidebar={true} > <Notification/> </Layout>) : <Navigate to={ !isAuth? `/login` : "ing" } />  }/>
+        <Route path="/friends" element={isAuth && isOnboarded? (<Layout showSidebar={true} > <Friends/> </Layout>) : <Navigate to={ !isAuth? `/login` : "ing" } />  }/>
         <Route path="/call/:id" element={ isAuth && isOnboarded ? (<CallPage />) : (<Navigate to={!isAuth ? "/login" : "/ing"} />)}/>
         <Route path="/chat/:id" element={ isAuth && isOnboarded ? (<Layout showSidebar={false}><ChatPage /></Layout>) : (<Navigate to={!isAuth ? "/login" : "/ing"} />) }/>
         <Route path="/ing" element={isAuth? (!isOnboarded ? <OnboardingPage/> : <Navigate to="/" />) :<Navigate to="/login" /> }/>

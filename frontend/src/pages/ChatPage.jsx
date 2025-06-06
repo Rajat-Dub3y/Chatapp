@@ -23,17 +23,24 @@ const ChatPage = () => {
 
   const {id:targetUserId}=useParams();
 
-  const [chatClient,,setChatClient]=useState(null);
+  const [chatClient,setChatClient]=useState(null);
   const [channel,setChannel]=useState(null);
   const [loading,setLoading]=useState(true);
 
+  console.log(1)
+
   const {authUser}=useAuthUser();
+
+
+  console.log(2)
 
   const {data:tokenData}=useQuery({
     queryKey:["StreamToken"],
     queryFn:getStreamToken,
     enabled:!!authUser
   })
+
+  console.log(3)
 
   useEffect(()=>{
     const initChat=async()=>{
@@ -42,12 +49,14 @@ const ChatPage = () => {
         console.log("Initializing stream chat client ...")
         const client=StreamChat.getInstance(STREAM_API_KEY)
 
+        console.log(11)
         await client.connectUser({
           id:authUser._id,
           name:authUser.fullname,
           image:authUser.profilepic
         },tokenData.token)
 
+        console.log(12)
         const channelId=[authUser._id,targetUserId].sort().join("-");
 
         const currChannel=client.channel("messaging",channelId,{
@@ -56,11 +65,13 @@ const ChatPage = () => {
 
         await currChannel.watch();
 
+        console.log(13)
+
         setChatClient(client);
         setChannel(currChannel)
+        setLoading(false)
 
       } catch (error) {
-        setLoading(false)
         console.log(error)
       }
     }

@@ -76,13 +76,14 @@ export const acceptFriendRequest=async(req,res)=>{
 
         const {id:requestId}=req.params;
 
-        const friendRequest=await FriendRequest.findOne(requestId);
+        const friendRequest=await FriendRequest.findById(requestId);
 
         if(!friendRequest){
             res.status(404).json({message:"Request not found"})
         }
 
-        if(friendRequest.recipiant.toString()!==req.user._id){
+        if (friendRequest.recipiant?.toString() !== req.user._id.toString()){
+            console.log()
             return res.status(403).json({message:"You are not recipiant of this request"});
         }
 
@@ -108,9 +109,9 @@ export const acceptFriendRequest=async(req,res)=>{
 export const getFriendsRequest=async(req,res)=>{
     try {
 
-        const incomingRequests=await FriendRequest({recipiant:req.user._id,status:"pending"}).populate("sender","fullname profilepic nativelanguage learninglanguage");
+        const incomingRequests=await FriendRequest.find({recipiant:req.user._id,status:"pending"}).populate("sender","fullname profilepic nativelanguage learninglanguage");
         
-        const acceptedRequests=await FriendRequest({sender:req.user._id,status:"accepted"}).populate("recipiant","fullname profilepic ");
+        const acceptedRequests=await FriendRequest.find({sender:req.user._id,status:"accepted"}).populate("recipiant","fullname profilepic ");
 
         res.status(200).json({incomingRequests,acceptedRequests})
 
@@ -123,8 +124,7 @@ export const getFriendsRequest=async(req,res)=>{
 export const getOutgoingFriendsRequest=async(req,res)=>{
     try {
 
-        const outgoingRequests=await FriendRequest({sender:req.user._id,status:"pending"}).populate("sender","fullname profilepic nativelanguage learninglanguage");
-        
+        const outgoingRequests=await FriendRequest.find({sender:req.user._id,status:"pending"}).populate("sender","fullname profilepic nativelanguage learninglanguage");
         res.status(200).json({outgoingRequests})
 
     } catch (error) {

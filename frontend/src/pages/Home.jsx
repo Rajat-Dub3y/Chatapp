@@ -8,6 +8,7 @@ import FriendCard from '../components/FriendCard';
 import NoFriendsFound from '../components/NoFriendsFound';
 import { Link } from 'react-router';
 
+
 const Home = () => {
 
   const queryClient=useQueryClient();
@@ -33,15 +34,20 @@ const Home = () => {
     onSuccess:()=>queryClient.invalidateQueries({queryKey:["outgoingFriendReqs"]})
   })
 
-  useEffect(()=>{
-    const outgoingIds=new Set()
-    if(outgoingFriendReqs && outgoingFriendReqs.length>0){
-      outgoingFriendReqs.forEach((req) => {
-        outgoingIds.add(req.id)
-      })
-      setOutgoingRequestIds(outgoingIds)
-    }
-  },[outgoingFriendReqs])
+useEffect(() => {
+  const outgoingIds = new Set();
+
+  if (outgoingFriendReqs?.outgoingRequests?.length > 0) {
+    outgoingFriendReqs.outgoingRequests.forEach((req) => {
+      outgoingIds.add(req.recipiant); // ✅ correct field spelling
+    });
+  }
+
+  setOutgoingRequestIds(outgoingIds);
+}, [outgoingFriendReqs]);
+
+
+  console.log(outgoingFriendReqs)
 
 
   return (
