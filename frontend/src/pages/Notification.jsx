@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { acceptFriendRequest, getFriendRequest } from '../lib/api';
-import { Bell, ClockIcon, MessageSquareIcon, UserCheckIcon } from 'lucide-react';
+import { BellIcon, ClockIcon, MessageSquareIcon, UserCheckIcon } from 'lucide-react';
 import NoNotificationsFound from '../components/NoNotificationsFound';
 
 const Notification = () => {
@@ -86,7 +86,7 @@ const Notification = () => {
             {acceptedRequests.length > 0 && (
               <section className="space-y-4">
                 <h2 className="text-xl font-semibold flex items-center gap-2">
-                  <Bell className="h-5 w-5 text-success" />
+                  <BellIcon className="h-5 w-5 text-success" />
                   New Connections
                 </h2>
 
