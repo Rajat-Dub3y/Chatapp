@@ -1,7 +1,7 @@
 import Navbar from "./Navbar"
 import Sidebar from "./Sidebar"
 
-const Layout = ({Children,showSidebar=false}) => {
+const Layout = ({children,showSidebar=false}) => {
   return (
     <div className="min-h-screen">
         <div className="flex">
@@ -9,7 +9,7 @@ const Layout = ({Children,showSidebar=false}) => {
             <div className="flex-1 flex flex-col">
                 <Navbar/>
                 <main className="flex-1 overflow-y-auto" >
-                    {Children}
+                    {children}
                 </main>
             </div>
         </div>

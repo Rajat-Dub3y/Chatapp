@@ -52,9 +52,7 @@ const OnboardingPage = () => {
           <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Complete Your Profile</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* PROFILE PIC CONTAINER */}
             <div className="flex flex-col items-center justify-center space-y-4">
-              {/* IMAGE PREVIEW */}
               <div className="size-32 rounded-full bg-base-300 overflow-hidden">
                 {formState.profilepic ? (
                   <img
@@ -68,8 +66,6 @@ const OnboardingPage = () => {
                   </div>
                 )}
               </div>
-
-              {/* Generate Random Avatar BTN */}
               <div className="flex items-center gap-2">
                 <button type="button" onClick={handleRandomAvatar} className="btn btn-accent">
                   <ShuffleIcon className="size-4 mr-2" />
@@ -78,7 +74,6 @@ const OnboardingPage = () => {
               </div>
             </div>
 
-            {/* FULL NAME */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Full Name</span>
@@ -93,7 +88,6 @@ const OnboardingPage = () => {
               />
             </div>
 
-            {/* BIO */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Bio</span>

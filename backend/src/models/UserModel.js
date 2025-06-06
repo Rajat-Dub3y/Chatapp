@@ -24,7 +24,7 @@ const userSchema=mongoose.Schema({
         type:String,
         default:"",
     },
-    nativlanguage:{
+    nativelanguage:{
         type:String,
         default:""
     },
@@ -40,7 +40,7 @@ const userSchema=mongoose.Schema({
         type:Boolean,
         default:false
     },
-    Friends:[
+    friends:[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:"User"

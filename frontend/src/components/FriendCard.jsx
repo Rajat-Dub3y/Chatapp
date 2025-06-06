@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { getLanguageFlag } from "../lib/getLanguageFlag";
+import { GetLanguageFlags } from "./GetLanguageFlags";
 
 
 const FriendCard = ({ friend }) => {
@@ -15,12 +15,12 @@ const FriendCard = ({ friend }) => {
 
         <div className="flex flex-wrap gap-1.5 mb-3">
           <span className="badge badge-secondary text-xs">
-            {getLanguageFlag(friend.nativeLanguage)}
-            Native: {friend.nativeLanguage}
+            {GetLanguageFlags(friend.nativelanguage)}
+            Native: {friend.nativelanguage}
           </span>
           <span className="badge badge-outline text-xs">
-            {getLanguageFlag(friend.learningLanguage)}
-            Learning: {friend.learningLanguage}
+            {GetLanguageFlags(friend.learninglanguage)}
+            Learning: {friend.learninglanguage}
           </span>
         </div>
 

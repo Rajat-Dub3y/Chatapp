@@ -52,8 +52,8 @@ export const sendFriendRequest=async(req,res)=>{
 
         const existingRequest=await FriendRequest.findOne({
             $or:[
-                {sender:myId,recipient:recipiantId},
-                {sender:recipiantId,recipient:myId},
+                {sender:myId,recipiant:recipiantId},
+                {sender:recipiantId,recipiant:myId},
             ],
         })
         
@@ -61,7 +61,7 @@ export const sendFriendRequest=async(req,res)=>{
             return res.status(400).json({message:"A friend request already exists"})
         }
 
-        const friendRequest=await FriendRequest({sender:myId,recipiant:recipiantId})
+        const friendRequest = await new FriendRequest({ sender: myId, recipiant: recipiantId }).save();
 
         res.status(201).json(friendRequest)
 
@@ -82,19 +82,19 @@ export const acceptFriendRequest=async(req,res)=>{
             res.status(404).json({message:"Request not found"})
         }
 
-        if(friendRequest.recipient.toString()!==req.user._id){
+        if(friendRequest.recipiant.toString()!==req.user._id){
             return res.status(403).json({message:"You are not recipiant of this request"});
         }
 
         friendRequest.status="accepted";
         await friendRequest.save()
 
-        await User.findByIdAndUpdate(friendRequest.recipient,{
+        await User.findByIdAndUpdate(friendRequest.recipiant,{
             $addToSet:{friends:friendRequest.sender}
         })
 
         await User.findByIdAndUpdate(friendRequest.sender,{
-            $addToSet:{friends:friendRequest.recipient}
+            $addToSet:{friends:friendRequest.recipiant}
         })
         
         res.status(201).json(friendRequest)
@@ -110,7 +110,7 @@ export const getFriendsRequest=async(req,res)=>{
 
         const incomingRequests=await FriendRequest({recipiant:req.user._id,status:"pending"}).populate("sender","fullname profilepic nativelanguage learninglanguage");
         
-        const acceptedRequests=await FriendRequest({sender:req.user._id,status:"accepted"}).populate("recipient","fullname profilepic ");
+        const acceptedRequests=await FriendRequest({sender:req.user._id,status:"accepted"}).populate("recipiant","fullname profilepic ");
 
         res.status(200).json({incomingRequests,acceptedRequests})
 
@@ -125,7 +125,7 @@ export const getOutgoingFriendsRequest=async(req,res)=>{
 
         const outgoingRequests=await FriendRequest({sender:req.user._id,status:"pending"}).populate("sender","fullname profilepic nativelanguage learninglanguage");
         
-        res.status(200).json({outgoingRequestsing})
+        res.status(200).json({outgoingRequests})
 
     } catch (error) {
         console.log(error)

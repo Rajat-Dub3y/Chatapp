@@ -1,6 +1,7 @@
-import { LANGUAGE_TO_FLAG } from "./constants";
+import { LANGUAGE_TO_FLAG } from "../lib/constants";
 
-export const getLanguageFlag=(language)=> {
+
+export const GetLanguageFlags=(language)=> {
   if (!language) return null;
 
   const langLower = language.toLowerCase();

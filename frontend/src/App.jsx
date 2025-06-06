@@ -25,14 +25,13 @@ const App=()=> {
   return (
     <div className="h-screen" data-theme={theme}>
       <Routes>
-        <Route path="/" element={isAuth && isOnboarded? (<Layout showSidebar={true} > <Home/> </Layout>) : <Navigate to={ !isAuth? `/login` : "onboarding" } />  }/>
-        <Route path="/signup" element={ !isAuth ? <SignUpPage/> : <Navigate to={ isOnboarded ? "/" : "/onboarding" }/> } />
-        <Route path="/login" element={ !isAuth ? <LoginPage/> : <Navigate to={ isOnboarded ? "/" : "/onboarding" }/>}/>
-        <Route path="/notifications" element={isAuth && isOnboarded? (<Layout showSidebar={true} > <Notification/> </Layout>) : <Navigate to={ !isAuth? `/login` : "onboarding" } />  }/>
-        <Route path="/call/:id" element={ isAuth && isOnboarded ? (<CallPage />) : (<Navigate to={!isAuth ? "/login" : "/onboarding"} />)}/>
-        <Route path="/chat/:id" element={ isAuth && isOnboarded ? (<Layout showSidebar={false}><ChatPage /></Layout>) : (<Navigate to={!isAuth ? "/login" : "/onboarding"} />) }/>
-        <Route path="/onboarding" element={isAuth? (!isOnboarded ? <OnboardingPage/> : <Navigate to="/" />) :<Navigate to="/login" /> }/>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/" element={isAuth && isOnboarded? (<Layout showSidebar={true} > <Home/> </Layout>) : <Navigate to={ !isAuth? `/login` : "ing" } />  }/>
+        <Route path="/signup" element={ !isAuth ? <SignUpPage/> : <Navigate to={ isOnboarded ? "/" : "/ing" }/> } />
+        <Route path="/login" element={ !isAuth ? <LoginPage/> : <Navigate to={ isOnboarded ? "/" : "/ing" }/>}/>
+        <Route path="/notifications" element={isAuth && isOnboarded? (<Layout showSidebar={true} > <Notification/> </Layout>) : <Navigate to={ !isAuth? `/login` : "ing" } />  }/>
+        <Route path="/call/:id" element={ isAuth && isOnboarded ? (<CallPage />) : (<Navigate to={!isAuth ? "/login" : "/ing"} />)}/>
+        <Route path="/chat/:id" element={ isAuth && isOnboarded ? (<Layout showSidebar={false}><ChatPage /></Layout>) : (<Navigate to={!isAuth ? "/login" : "/ing"} />) }/>
+        <Route path="/ing" element={isAuth? (!isOnboarded ? <OnboardingPage/> : <Navigate to="/" />) :<Navigate to="/login" /> }/>
       </Routes>
 
       <Toaster/>

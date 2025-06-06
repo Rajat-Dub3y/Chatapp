@@ -2,13 +2,16 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { getOutgoingFriendReqs, getRecommendedUsers, getUserFriends, sendFriendRequest } from '../lib/api';
 import { CheckCircleIcon, MapPinIcon, UserIcon, UserPlusIcon } from 'lucide-react';
-import { getLanguageFlag } from '../components/FriendCard';
 import { capitialize } from '../lib/utils';
+import { GetLanguageFlags } from '../components/GetLanguageFlags';
+import FriendCard from '../components/FriendCard';
+import NoFriendsFound from '../components/NoFriendsFound';
+import { Link } from 'react-router';
 
 const Home = () => {
 
   const queryClient=useQueryClient();
-  const [outgoingRequestsIds,setOutgoingRequestIds]=useState([])
+  const [outgoingRequestsIds,setOutgoingRequestIds]=useState(new Set())
 
   const {data:friends=[],isLoading:loadingFriends}=useQuery({
     queryKey:["friends"],
@@ -45,7 +48,7 @@ const Home = () => {
     <div className="p-4 sm:p-6 lg:p-8">
       <div className="container mx-auto space-y-10">
         <div className="flex flex-col sm:flex-row items-start sm:items sm:items-center justify-between gap-4">
-          <h2 className="text-2xl sm:tetx-3xl font-bold tracking-tight">Your Friends</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Your Friends</h2>
           <Link to="/notifications" className="btn btn-outline btn-sm">
             <UserIcon className="mr-2 size-4" />
             Friend Request
@@ -117,12 +120,12 @@ const Home = () => {
 
                       <div className="flex flex-wrap gap-1.5">
                         <span className="badge badge-secondary">
-                          {getLanguageFlag(user.nativeLanguage)}
-                          Native: {capitialize(user.nativeLanguage)}
+                          {GetLanguageFlags(user.nativelanguage)}
+                          Native: {capitialize(user.nativelanguage) }
                         </span>
                         <span className="badge badge-outline">
-                          {getLanguageFlag(user.learningLanguage)}
-                          Learning: {capitialize(user.learningLanguage)}
+                          {GetLanguageFlags(user.learninglanguage)}
+                          Learning: {capitialize(user.learninglanguage)}
                         </span>
                       </div>
 

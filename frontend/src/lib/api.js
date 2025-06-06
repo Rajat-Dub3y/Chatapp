@@ -30,27 +30,28 @@ export const completeOnBoarding=async(userData)=>{
 }
 
 export const getUserFriends=async()=>{
-    const response=await axiosInstance.post("/users/friends")
+    const response=await axiosInstance.get("/users/friends")
     return response.data
 }
 
 export const getRecommendedUsers=async()=>{
-    const response=await axiosInstance.post("/users")
+    const response=await axiosInstance.get("/users")
     return response.data
 }
 
 export const getOutgoingFriendReqs=async()=>{
-    const response=await axiosInstance.post("/users/outgoing-friend-requests")
+    const response=await axiosInstance.get("/users/outgoing-friend-requests")
     return response.data
 }
 
 export const sendFriendRequest=async(userId)=>{
+    console.log("frontend")
     const response=await axiosInstance.post(`/users/friend-requests/${userId}`)
     return response.data
 }
 
 export const getFriendRequest=async()=>{
-    const response=await axiosInstance.post(`/users/friend-requests`)
+    const response=await axiosInstance.get(`/users/friend-requests`)
     return response.data
 }
 

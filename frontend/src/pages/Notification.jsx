@@ -97,14 +97,14 @@ const Notification = () => {
                         <div className="flex items-start gap-3">
                           <div className="avatar mt-1 size-10 rounded-full">
                             <img
-                              src={notification.recipient.profilepic}
-                              alt={notification.recipient.fullname}
+                              src={notification.recipiant.profilepic}
+                              alt={notification.recipiant.fullname}
                             />
                           </div>
                           <div className="flex-1">
-                            <h3 className="font-semibold">{notification.recipient.fullname}</h3>
+                            <h3 className="font-semibold">{notification.recipiant.fullname}</h3>
                             <p className="text-sm my-1">
-                              {notification.recipient.fullname} accepted your friend request
+                              {notification.recipiant.fullname} accepted your friend request
                             </p>
                             <p className="text-xs flex items-center opacity-70">
                               <ClockIcon className="h-3 w-3 mr-1" />
